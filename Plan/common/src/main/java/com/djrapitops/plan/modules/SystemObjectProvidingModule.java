@@ -20,6 +20,8 @@ import com.djrapitops.plan.settings.config.ExtensionSettings;
 import com.djrapitops.plan.settings.config.PlanConfig;
 import com.djrapitops.plan.settings.locale.Locale;
 import com.djrapitops.plan.settings.locale.LocaleSystem;
+import com.djrapitops.plan.domain.DataService;
+import com.djrapitops.plan.domain.DataSvc;
 import dagger.Module;
 import dagger.Provides;
 
@@ -52,6 +54,12 @@ public class SystemObjectProvidingModule {
     @Named("isExtensionEnabled")
     Predicate<String> provideExtensionEnabledConfigCheck(PlanConfig config) {
         return config.getExtensionSettings()::isEnabled;
+    }
+
+    @Provides
+    @Singleton
+    DataService dataService(DataSvc impl) {
+        return impl;
     }
 
 }

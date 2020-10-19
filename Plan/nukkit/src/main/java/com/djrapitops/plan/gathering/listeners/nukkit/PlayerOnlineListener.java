@@ -54,7 +54,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Event Listener for PlayerJoin, PlayerQuit and PlayerKickEvents.
+ * Event Listener for PlayerServerJoin, PlayerQuit and PlayerKickEvents.
  *
  * @author Rsl1122
  */

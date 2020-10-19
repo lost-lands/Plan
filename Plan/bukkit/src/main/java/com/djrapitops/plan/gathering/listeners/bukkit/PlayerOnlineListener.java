@@ -21,6 +21,9 @@ import com.djrapitops.plan.delivery.domain.keys.SessionKeys;
 import com.djrapitops.plan.delivery.export.Exporter;
 import com.djrapitops.plan.delivery.webserver.cache.DataID;
 import com.djrapitops.plan.delivery.webserver.cache.JSONCache;
+import com.djrapitops.plan.domain.DataService;
+import com.djrapitops.plan.domain.gathering.Gamemode;
+import com.djrapitops.plan.domain.gathering.PlayerServerJoin;
 import com.djrapitops.plan.extension.CallEvents;
 import com.djrapitops.plan.extension.ExtensionSvc;
 import com.djrapitops.plan.gathering.cache.NicknameCache;
@@ -39,6 +42,7 @@ import com.djrapitops.plan.storage.database.transactions.events.*;
 import com.djrapitops.plan.utilities.logging.ErrorContext;
 import com.djrapitops.plan.utilities.logging.ErrorLogger;
 import com.djrapitops.plugin.logging.L;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -53,7 +57,7 @@ import java.net.InetAddress;
 import java.util.UUID;
 
 /**
- * Event Listener for PlayerJoin, PlayerQuit and PlayerKickEvents.
+ * Event Listener for PlayerServerJoin, PlayerQuit and PlayerKickEvents.
  *
  * @author Rsl1122
  */
@@ -69,6 +73,7 @@ public class PlayerOnlineListener implements Listener {
     private final NicknameCache nicknameCache;
     private final SessionCache sessionCache;
     private final ErrorLogger errorLogger;
+    private final DataService dataService;
     private final Status status;
 
     @Inject
@@ -82,6 +87,7 @@ public class PlayerOnlineListener implements Listener {
             GeolocationCache geolocationCache,
             NicknameCache nicknameCache,
             SessionCache sessionCache,
+            DataService dataService,
             Status status,
             ErrorLogger errorLogger
     ) {
@@ -94,6 +100,7 @@ public class PlayerOnlineListener implements Listener {
         this.geolocationCache = geolocationCache;
         this.nicknameCache = nicknameCache;
         this.sessionCache = sessionCache;
+        this.dataService = dataService;
         this.status = status;
         this.errorLogger = errorLogger;
     }
@@ -140,6 +147,7 @@ public class PlayerOnlineListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent event) {
         try {
+            dataService.push(PlayerJoinEvent.class, event);
             actOnJoinEvent(event);
         } catch (Exception e) {
             errorLogger.log(L.ERROR, e, ErrorContext.builder().related(event).build());

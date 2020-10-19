@@ -19,6 +19,8 @@ package com.djrapitops.plan.modules.bukkit;
 import com.djrapitops.plan.BukkitServerShutdownSave;
 import com.djrapitops.plan.BukkitTaskSystem;
 import com.djrapitops.plan.TaskSystem;
+import com.djrapitops.plan.domain.BukkitMapping;
+import com.djrapitops.plan.domain.Mapping;
 import com.djrapitops.plan.gathering.BukkitSensor;
 import com.djrapitops.plan.gathering.ServerSensor;
 import com.djrapitops.plan.gathering.ServerShutdownSave;
@@ -70,4 +72,7 @@ public interface BukkitSuperClassBindingModule {
 
     @Binds
     ServerSensor<?> bindGenericsServerSensor(ServerSensor<World> sensor);
+
+    @Binds
+    Mapping bindMapping(BukkitMapping mapping);
 }
