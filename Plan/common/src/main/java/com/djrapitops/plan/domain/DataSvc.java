@@ -44,6 +44,7 @@ public class DataSvc implements DataService {
 
     @Override
     public <A> DataService push(Class<A> type, A data) {
+        if (data == null) return this;
         List<Mapper> mappers = this.mappers.get(type);
         for (Mapper mapper : mappers) {
             push(mapper.typeB, mapper.func.apply(data));
@@ -66,7 +67,7 @@ public class DataSvc implements DataService {
         List<Mapper> mappers = this.mappersReverse.get(type);
         for (Mapper mapper : mappers) {
             Optional found = pull(mapper.typeA)
-                    .map(data -> (A) mapper.func.apply(data));
+                    .map(data -> mapper.func.apply(data));
             if (found.isPresent()) return found;
         }
 

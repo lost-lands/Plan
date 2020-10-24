@@ -18,7 +18,7 @@ package com.djrapitops.plan.domain;
 
 import com.djrapitops.plan.domain.gathering.Gamemode;
 import com.djrapitops.plan.domain.gathering.PlayerInformation;
-import com.djrapitops.plan.domain.gathering.PlayerServerJoin;
+import com.djrapitops.plan.domain.gathering.events.PlayerServerJoin;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -39,24 +39,33 @@ public class BukkitMapping implements Mapping {
     @Override
     public void register() {
         dataService.registerMapper(
-                Player.class, PlayerInformation.class,
-                player -> new PlayerInformation(
-                        player.getUniqueId(),
-                        player.getName(),
-                        player.getDisplayName(),
-                        player.getAddress().getAddress(),
-                        player.getWorld().getName(),
-                        dataService.mapTo(Gamemode.class, player.getGameMode())
-                )
+                Player.class, PlayerInformation.class, this::mapPlayer
         ).registerMapper(
-                GameMode.class, Gamemode.class,
-                gm -> Gamemode.valueOf(gm.name())
+                GameMode.class, Gamemode.class, this::mapGameMode
         ).registerMapper(
-                PlayerJoinEvent.class, PlayerServerJoin.class,
-                event -> new PlayerServerJoin(
-                        dataService.mapTo(PlayerInformation.class, event.getPlayer()),
-                        System.currentTimeMillis()
-                )
+                PlayerJoinEvent.class, PlayerServerJoin.class, this::mapPlayerJoinEvent
+        );
+    }
+
+    private PlayerInformation mapPlayer(Player player) {
+        return new PlayerInformation(
+                player.getUniqueId(),
+                player.getName(),
+                player.getDisplayName(),
+                player.getAddress().getAddress(),
+                player.getWorld().getName(),
+                dataService.mapTo(Gamemode.class, player.getGameMode())
+        );
+    }
+
+    private Gamemode mapGameMode(GameMode gm) {
+        return Gamemode.valueOf(gm.name());
+    }
+
+    private PlayerServerJoin mapPlayerJoinEvent(PlayerJoinEvent event) {
+        return new PlayerServerJoin(
+                dataService.mapTo(PlayerInformation.class, event.getPlayer()),
+                System.currentTimeMillis()
         );
     }
 }

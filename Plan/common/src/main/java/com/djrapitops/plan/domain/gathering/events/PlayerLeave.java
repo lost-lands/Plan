@@ -14,13 +14,15 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with Plan. If not, see <https://www.gnu.org/licenses/>.
  */
-package com.djrapitops.plan.domain.gathering;
+package com.djrapitops.plan.domain.gathering.events;
 
-public class PlayerServerJoin {
+import com.djrapitops.plan.domain.gathering.PlayerInformation;
+
+public class PlayerLeave {
     public final PlayerInformation information;
     public final long time;
 
-    public PlayerServerJoin(
+    public PlayerLeave(
             PlayerInformation information,
             long time
     ) {
