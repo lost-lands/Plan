@@ -16,7 +16,9 @@
  */
 package com.djrapitops.plan.gathering.cache;
 
+import com.djrapitops.plan.domain.DataSvc;
 import com.djrapitops.plan.gathering.domain.Session;
+import com.djrapitops.plan.gathering.sessions.SessionCache;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,7 +40,7 @@ class SessionCacheTest {
     void setUp() {
         session = new Session(uuid, serverUUID, 12345L, "World1", "SURVIVAL");
 
-        sessionCache = new SessionCache();
+        sessionCache = new SessionCache(new DataSvc());
         sessionCache.cacheSession(uuid, session);
     }
 
@@ -56,7 +58,7 @@ class SessionCacheTest {
 
     @Test
     void sessionsAreRemovedFromCacheOnEnd() {
-        Optional<Session> ended = new SessionCache().endSession(uuid, System.currentTimeMillis());
+        Optional<Session> ended = new SessionCache(new DataSvc()).endSession(uuid, System.currentTimeMillis());
         assertTrue(ended.isPresent());
         for (Session session : SessionCache.getActiveSessions().values()) {
             fail("Session was still in cache: " + session);
@@ -65,7 +67,7 @@ class SessionCacheTest {
 
     @Test
     void sessionsAreRemovedFromCacheOnStart() {
-        Optional<Session> ended = new SessionCache().cacheSession(uuid, new Session(uuid, serverUUID, 52345L, "World1", "SURVIVAL"));
+        Optional<Session> ended = new SessionCache(new DataSvc()).cacheSession(uuid, new Session(uuid, serverUUID, 52345L, "World1", "SURVIVAL"));
         assertTrue(ended.isPresent());
         for (Session session : SessionCache.getActiveSessions().values()) {
             if (session.getDate() == 12345L) {

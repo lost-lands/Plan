@@ -14,22 +14,15 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with Plan. If not, see <https://www.gnu.org/licenses/>.
  */
-package com.djrapitops.plan.domain.delivery;
+package com.djrapitops.plan.gathering.domain.sessions;
 
-import java.util.UUID;
+import java.util.Collection;
 
-public class ServerUUID {
-    public final UUID uuid;
+public class UnfinishedSessions {
 
-    protected ServerUUID(UUID uuid) {
-        this.uuid = uuid;
-    }
+    public final Collection<ActiveSession> sessions;
 
-    public static ServerUUID from(UUID uuid) {
-        return new ServerUUID(uuid);
-    }
-
-    public static ServerUUID fromString(String name) {
-        return new ServerUUID(UUID.fromString(name));
+    public UnfinishedSessions(Collection<ActiveSession> sessions) {
+        this.sessions = sessions;
     }
 }

@@ -16,7 +16,7 @@
  */
 package com.djrapitops.plan.gathering.afk;
 
-import com.djrapitops.plan.gathering.cache.SessionCache;
+import com.djrapitops.plan.gathering.sessions.SessionCache;
 import com.djrapitops.plan.settings.config.PlanConfig;
 import com.djrapitops.plan.settings.config.paths.TimeSettings;
 

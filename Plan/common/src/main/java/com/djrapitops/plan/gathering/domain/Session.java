@@ -33,6 +33,7 @@ import java.util.concurrent.TimeUnit;
  * @author Rsl1122
  * @see SessionKeys for Key objects.
  */
+@Deprecated
 public class Session extends DynamicDataContainer implements DateHolder {
 
     private final long sessionStart;

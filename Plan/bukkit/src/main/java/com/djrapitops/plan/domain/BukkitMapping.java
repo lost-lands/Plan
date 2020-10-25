@@ -16,9 +16,9 @@
  */
 package com.djrapitops.plan.domain;
 
-import com.djrapitops.plan.domain.gathering.Gamemode;
 import com.djrapitops.plan.domain.gathering.PlayerInformation;
 import com.djrapitops.plan.domain.gathering.events.PlayerServerJoin;
+import com.djrapitops.plan.gathering.domain.sessions.Gamemode;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;

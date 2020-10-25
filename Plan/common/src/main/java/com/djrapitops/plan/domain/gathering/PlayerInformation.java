@@ -16,6 +16,8 @@
  */
 package com.djrapitops.plan.domain.gathering;
 
+import com.djrapitops.plan.gathering.domain.sessions.Gamemode;
+
 import java.net.InetAddress;
 import java.util.UUID;
 

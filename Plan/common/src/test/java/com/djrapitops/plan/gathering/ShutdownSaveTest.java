@@ -18,9 +18,9 @@ package com.djrapitops.plan.gathering;
 
 import com.djrapitops.plan.PlanSystem;
 import com.djrapitops.plan.delivery.domain.keys.SessionKeys;
-import com.djrapitops.plan.gathering.cache.SessionCache;
 import com.djrapitops.plan.gathering.domain.GMTimes;
 import com.djrapitops.plan.gathering.domain.Session;
+import com.djrapitops.plan.gathering.sessions.SessionCache;
 import com.djrapitops.plan.identification.Server;
 import com.djrapitops.plan.settings.locale.Locale;
 import com.djrapitops.plan.storage.database.DBSystem;

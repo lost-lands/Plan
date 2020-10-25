@@ -19,7 +19,7 @@ package com.djrapitops.plan.placeholder;
 import com.djrapitops.plan.delivery.domain.container.PlayerContainer;
 import com.djrapitops.plan.delivery.domain.keys.PlayerKeys;
 import com.djrapitops.plan.delivery.formatting.Formatters;
-import com.djrapitops.plan.gathering.cache.SessionCache;
+import com.djrapitops.plan.gathering.sessions.SessionCache;
 import com.djrapitops.plan.identification.ServerInfo;
 import com.djrapitops.plan.settings.config.PlanConfig;
 import com.djrapitops.plan.storage.database.DBSystem;

@@ -19,7 +19,7 @@ package com.djrapitops.plan.storage.database.transactions.events;
 import com.djrapitops.plan.delivery.webserver.cache.DataID;
 import com.djrapitops.plan.delivery.webserver.cache.JSONCache;
 import com.djrapitops.plan.exceptions.database.DBOpException;
-import com.djrapitops.plan.gathering.cache.SessionCache;
+import com.djrapitops.plan.gathering.sessions.SessionCache;
 import com.djrapitops.plan.storage.database.queries.DataStoreQueries;
 import com.djrapitops.plan.storage.database.queries.PlayerFetchQueries;
 import com.djrapitops.plan.storage.database.transactions.Transaction;

@@ -16,8 +16,8 @@
  */
 package com.djrapitops.plan.gathering.listeners.bukkit;
 
-import com.djrapitops.plan.gathering.cache.SessionCache;
 import com.djrapitops.plan.gathering.domain.Session;
+import com.djrapitops.plan.gathering.sessions.SessionCache;
 import com.djrapitops.plan.identification.ServerInfo;
 import com.djrapitops.plan.settings.config.WorldAliasSettings;
 import com.djrapitops.plan.storage.database.DBSystem;

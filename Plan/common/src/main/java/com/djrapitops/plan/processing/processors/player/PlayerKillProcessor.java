@@ -16,9 +16,9 @@
  */
 package com.djrapitops.plan.processing.processors.player;
 
-import com.djrapitops.plan.gathering.cache.SessionCache;
 import com.djrapitops.plan.gathering.domain.PlayerKill;
 import com.djrapitops.plan.gathering.domain.Session;
+import com.djrapitops.plan.gathering.sessions.SessionCache;
 import com.djrapitops.plan.processing.CriticalRunnable;
 
 import java.util.Optional;

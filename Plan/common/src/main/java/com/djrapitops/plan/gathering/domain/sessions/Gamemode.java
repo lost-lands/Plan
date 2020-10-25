@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with Plan. If not, see <https://www.gnu.org/licenses/>.
  */
-package com.djrapitops.plan.domain.gathering;
+package com.djrapitops.plan.gathering.domain.sessions;
 
 public enum Gamemode {
     SURVIVAL,

@@ -18,8 +18,8 @@ package com.djrapitops.plan.gathering.listeners.bukkit;
 
 import com.djrapitops.plan.delivery.formatting.EntityNameFormatter;
 import com.djrapitops.plan.delivery.formatting.ItemNameFormatter;
-import com.djrapitops.plan.gathering.cache.SessionCache;
 import com.djrapitops.plan.gathering.domain.Session;
+import com.djrapitops.plan.gathering.sessions.SessionCache;
 import com.djrapitops.plan.processing.Processing;
 import com.djrapitops.plan.processing.processors.player.MobKillProcessor;
 import com.djrapitops.plan.processing.processors.player.PlayerKillProcessor;

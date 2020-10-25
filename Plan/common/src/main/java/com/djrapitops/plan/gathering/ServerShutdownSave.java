@@ -18,8 +18,8 @@ package com.djrapitops.plan.gathering;
 
 import com.djrapitops.plan.delivery.domain.keys.SessionKeys;
 import com.djrapitops.plan.exceptions.database.DBInitException;
-import com.djrapitops.plan.gathering.cache.SessionCache;
 import com.djrapitops.plan.gathering.domain.Session;
+import com.djrapitops.plan.gathering.sessions.SessionCache;
 import com.djrapitops.plan.settings.locale.Locale;
 import com.djrapitops.plan.settings.locale.lang.PluginLang;
 import com.djrapitops.plan.storage.database.DBSystem;

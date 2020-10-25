@@ -14,48 +14,38 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with Plan. If not, see <https://www.gnu.org/licenses/>.
  */
-package com.djrapitops.plan.domain.gathering;
+package com.djrapitops.plan.gathering.domain.sessions;
 
-import com.djrapitops.plan.domain.delivery.FinishedSession;
 import com.djrapitops.plan.domain.delivery.ServerUUID;
 import com.djrapitops.plan.gathering.domain.WorldTimes;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ActiveSession {
+public class FinishedSession {
     public final UUID playerUUID;
+    public final ServerUUID serverUUID;
     public final long start;
+    public final long end;
     public final List<PlayerKill> kills;
     public final WorldTimes worldTimes;
-    private long afkTime;
+    public final long afkTime;
 
-    public ActiveSession(
+    public FinishedSession(
             UUID playerUUID,
+            ServerUUID serverUUID,
             long start,
-            WorldTimes worldTimes
+            long end,
+            List<PlayerKill> kills,
+            WorldTimes worldTimes,
+            long afkTime
     ) {
         this.playerUUID = playerUUID;
+        this.serverUUID = serverUUID;
         this.start = start;
+        this.end = end;
+        this.kills = kills;
         this.worldTimes = worldTimes;
-        this.kills = new ArrayList<>();
-        afkTime = 0L;
-    }
-
-    public void addAfkTime(long amount) {
-        afkTime += amount;
-    }
-
-    public FinishedSession toFinishedSession(ServerUUID serverUUID, long end) {
-        return new FinishedSession(
-                playerUUID,
-                serverUUID,
-                start,
-                end,
-                kills,
-                worldTimes,
-                afkTime
-        );
+        this.afkTime = afkTime;
     }
 }

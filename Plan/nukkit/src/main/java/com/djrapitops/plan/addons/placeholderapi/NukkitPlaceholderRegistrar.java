@@ -21,7 +21,7 @@ import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
 import com.djrapitops.plan.PlanSystem;
 import com.djrapitops.plan.delivery.domain.container.PlayerContainer;
 import com.djrapitops.plan.delivery.domain.keys.PlayerKeys;
-import com.djrapitops.plan.gathering.cache.SessionCache;
+import com.djrapitops.plan.gathering.sessions.SessionCache;
 import com.djrapitops.plan.placeholder.PlanPlaceholders;
 import com.djrapitops.plan.storage.database.queries.containers.ContainerFetchQueries;
 import com.djrapitops.plan.utilities.logging.ErrorContext;

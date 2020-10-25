@@ -14,25 +14,14 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with Plan. If not, see <https://www.gnu.org/licenses/>.
  */
-package com.djrapitops.plan.domain.gathering;
+package com.djrapitops.plan.gathering.domain.sessions;
 
-import java.util.UUID;
+public class KillerEntity {
+    public final String name;
+    public final String type;
 
-public class PlayerKill {
-    public final UUID killerUUID;
-    public final UUID victimUUID;
-    public final long time;
-    public final KillerEntity killedWith;
-
-    public PlayerKill(
-            UUID killerUUID,
-            UUID victimUUID,
-            long time,
-            KillerEntity killedWith
-    ) {
-        this.killerUUID = killerUUID;
-        this.victimUUID = victimUUID;
-        this.time = time;
-        this.killedWith = killedWith;
+    public KillerEntity(String name, String type) {
+        this.name = name;
+        this.type = type;
     }
 }
