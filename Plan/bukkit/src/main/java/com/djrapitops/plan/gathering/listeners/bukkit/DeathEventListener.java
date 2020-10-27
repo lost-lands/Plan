@@ -26,6 +26,8 @@ import com.djrapitops.plan.processing.processors.player.PlayerKillProcessor;
 import com.djrapitops.plan.utilities.logging.ErrorContext;
 import com.djrapitops.plan.utilities.logging.ErrorLogger;
 import com.djrapitops.plugin.logging.L;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -35,6 +37,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.projectiles.ProjectileSource;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 import javax.inject.Inject;
 import java.util.UUID;
@@ -60,9 +63,33 @@ public class DeathEventListener implements Listener {
 
     @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.MONITOR)
+    public void onDeath(PlayerDeathEvent event) {
+        if(event.getEntity() instanceof Player) {
+            String deathmessage = event.getDeathMessage();
+            if(deathmessage.contains("with an End Crystal")) { //Player was killed by an End Crystal
+                if (event.getNewExp() < 0) {
+                    //Mock crystal death event from DMPMonitorCombat
+                    // DMPMonitorCombat sets the newExp to -1 so we can differentiate between mock and real death events
+                    long time = System.currentTimeMillis();
+                    String[] message = deathmessage.split("\\s+");
+                    Player killer = Bukkit.getPlayer(ChatColor.stripColor(message[0]));
+                    Player victim = event.getEntity();
+                    Runnable processor = new PlayerKillProcessor(killer.getUniqueId(), time, victim.getUniqueId(), "End Crystal");
+                    processing.submit(processor);
+                }
+            }
+        }
+    }
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onDeath(EntityDeathEvent event) {
         long time = System.currentTimeMillis();
         LivingEntity dead = event.getEntity();
+
+        if (dead.getLastDamage() < 0) { 
+        //checks if the last damage is negative which is set by the secondary mock event. If so, disregard the death so we don't log a death twice for a player.
+            return;
+        }
+        dead.setLastDamage​(-1); //set the last damage to a negative value so we can differentiate between the real and mock death event sent from DMPMonitorCombat
 
         if (dead instanceof Player) {
             // Process Death
@@ -110,9 +137,8 @@ public class DeathEventListener implements Listener {
                 itemInHand = Material.AIR;
             }
         }
-
         String weaponName = new ItemNameFormatter().apply(itemInHand.name());
-
+        
         return victimUUID != null
                 ? new PlayerKillProcessor(killer.getUniqueId(), time, victimUUID, weaponName)
                 : new MobKillProcessor(killer.getUniqueId());
